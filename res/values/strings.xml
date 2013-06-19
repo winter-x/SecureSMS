@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">安信</string>
+    <string name="telephone_empty">手机号码不能为空！</string>
+    <string name="password_empty">密码不能为空！</string>
+    <string name="submit">确定</string>
+</resources>
