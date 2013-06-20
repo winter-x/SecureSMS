@@ -70,18 +70,27 @@ public class MainForm extends Activity {
             new Thread(){
                 @Override
                 public void run(){//你要执行的方法
-                    while (true){
-                        try {
-                            wait(1);
+//                    while (true){//等待用户完全输入手机号和密码
+//                        try {
+//                            wait(1);
+//                        }
+//                        catch (Exception e){}
+//                        if ((!telephone.equals(""))&&(!password.equals(""))){
+//                            break;
+//                        }
+//                    }
+                    synchronized (password){
+                        while (password.equals("")){
+                            try {
+                                password.wait();
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                            }
                         }
-                        catch (Exception e){}
-                        if ((!telephone.equals(""))&&(!password.equals(""))){
-                            break;
-                        }
+                        prikey = ClientAction.getPrikey(telephone, password);
+                        handler.sendEmptyMessage(0);//执行完毕后给handler发送一个空消息
                     }
-                    prikey = ClientAction.getPrikey(telephone, password);
                     //Toast.makeText(MainForm.this,"正在获取私钥", Toast.LENGTH_SHORT).show();
-                    handler.sendEmptyMessage(0);//执行完毕后给handler发送一个空消息
                 }
             }.start();
         }
@@ -165,6 +174,9 @@ public class MainForm extends Activity {
                                 Toast.makeText(getApplicationContext(), R.string.password_empty, Toast.LENGTH_SHORT).show();
                                 keepDialog(dialog);
                             } else {
+                                synchronized (password){
+                                    password.notify();
+                                }
                                 distoryDialog(dialog);
                             }
                         }

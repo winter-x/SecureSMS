@@ -17,12 +17,7 @@
     <Button
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:text="加密"
+    android:text="发送"
     android:id="@+id/btnsend" android:layout_gravity="center_vertical|right"
     android:textAlignment="center"/>
-    <Button
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:text="New Button"
-    android:id="@+id/btntemp" android:layout_gravity="left|center_vertical"/>
 </LinearLayout>
